@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+     <title>{% block title %}Welcome!{% endblock %}</title>
+
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="{{ asset('/css/bootstrap.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('/css/starter-template.css') }}" />
+    <link rel="stylesheet" href="{{ asset('/css/news.css') }}" />
+    {% block stylesheets %}{% endblock %}
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+  </head>
+  <body>
+    {{ include('header.html.twig') }}
+    <div class="container" >
+    <div class="starter-template">
+           <div class="col-lg-12">
+               {%  set currentUri = path(app.request.attributes.get('_route'),
+               app.request.attributes.get('_route_params')) %}
+
+               {% if('/add' not in currentUri ) %}
+               <div class="add_news_btn">
+                   <a type="button" href="{{ path('news_add') }}" class="btn btn-primary">Add
+                       News</a>
+               </div>
+               {% endif %}
+       {% block body %}{% endblock %}
+           </div>
+      </div>
+    </div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+   <script src="{{ asset('/js/jquery.min.js') }}"></script>
+<script src="{{ asset('/js/bootstrap.min.js') }}"></script>
+     {% block javascripts %}{% endblock %}
+  </body>
+</html>
