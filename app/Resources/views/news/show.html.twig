@@ -10,8 +10,11 @@
 
         <div  class="add_news_btn col-lg-3">
             <a type="button" href="{{ path('news_download', { 'id': news.id }) }}" class="btn btn-primary">Download</a>
-
+            {% if app.user %}
+               {% if app.user.getId == news.getUser.getId %}
             <a type="button" href="{{ path('news_delete', { 'id': news.id }) }}" class="btn btn-danger delete-news">Delete</a>
+               {% endif %}
+            {% endif %}
 
         </div>
 
@@ -25,7 +28,7 @@
             {%  if news.imageName  is not empty  %}
             <p style="float: left; padding-right: 20px">
                 {%
-                set image =  '/images/news/' ~ news.imageName
+                set image =  newsImagesPath ~ news.imageName
                 %}
 
                 <img src="{{ image  }}" />

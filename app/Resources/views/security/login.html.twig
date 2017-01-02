@@ -1,0 +1,31 @@
+
+{% extends 'layout.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('/css/login.css') }}" />
+{% endblock %}
+{% block body %}
+
+<div class="modal-dialog">
+    <div class="loginmodal-container">
+        <h1>Login to Your Account</h1>
+        {% if error %}
+            <div class="error">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        {% endif %}
+        <form action="{{ path('login') }}" method="post">
+            <label for="username">Email:</label> <span class="required">*</span>
+            <input type="text" id="username" name="_username" value="{{ last_username }}" />
+
+            <label for="password">Password:</label> <span class="required">*</span>
+            <input type="password" id="password" name="_password" />
+
+            <input type="submit"  value="login" class="login loginmodal-submit" >
+        </form>
+        <div class="login-help">
+            <a href="{{ path('user_registration') }}">Create account</a> &nbsp;&nbsp; <a href="{{ path('forgot_password') }}">forgot password?</a>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

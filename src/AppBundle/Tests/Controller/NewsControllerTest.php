@@ -6,6 +6,28 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class NewsControllerTest extends WebTestCase
 {
+
+
+    public function testIndex()
+    {
+        $client = static::createClient();
+
+        $crawler = $client->request('GET', '/');
+
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertContains('Breaking News', $crawler->filter('h2')->text());
+    }
+
+    public function testNewsAdd()
+    {
+        $client = static::createClient();
+
+        $crawler = $client->request('GET', '/news/add');
+
+        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+
+    }
+
     /*
     public function testCompleteScenario()
     {

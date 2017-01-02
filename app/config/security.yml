@@ -4,18 +4,16 @@ security:
 
     # http://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
     encoders:
-        FOS\UserBundle\Model\UserInterface: bcrypt
-    
-
-    role_hierarchy:
-        ROLE_ADMIN:       ROLE_USER
-        ROLE_SUPER_ADMIN: ROLE_ADMIN\
+        AppBundle\Entity\User: bcrypt
 
     providers:
         in_memory:
             memory: ~
-        fos_userbundle:
-            id: fos_user.user_provider.username
+
+        database_provider:
+             entity:
+                 class: AppBundle:User
+                 property: email
 
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs
@@ -24,25 +22,20 @@ security:
             security: false
 
         main:
-            #anonymous: ~
-            pattern: ^/
+            anonymous: ~
             form_login:
-                provider: fos_userbundle
-                csrf_token_generator: security.csrf.token_manager
-                # if you are using Symfony < 2.8, use the following config instead:
-                # csrf_provider: form.csrf_provider
-
-            logout:       true
-            anonymous:    true
-            # activate different ways to authenticate
-
-            # http_basic: ~
-            # http://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
-
-            # form_login: ~
-            # http://symfony.com/doc/current/cookbook/security/form_login_setup.html
+                    login_path: login
+                    check_path: login
+            logout:
+                    path:   logout # a route called logout
+                    target: /
+            pattern:  ^/
+            http_basic: ~
+            provider: database_provider
     access_control:
-        - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/admin/, role: ROLE_ADMIN }
+         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
+         - { path: ^/verification, role: IS_AUTHENTICATED_ANONYMOUSLY }
+         - { path: ^/news/index, role: IS_AUTHENTICATED_ANONYMOUSLY }
+         - { path: ^/news/add, role: ROLE_USER }
+         - { path: ^/news/delete, role: ROLE_USER }

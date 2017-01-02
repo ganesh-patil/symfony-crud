@@ -1,0 +1,34 @@
+{% extends 'layout.html.twig' %}
+{% block stylesheets %}
+<link rel="stylesheet" href="{{ asset('/css/login.css') }}" />
+{% endblock %}
+{% block body %}
+
+    <div class="modal-dialog">
+        <div class="loginmodal-container">
+            <h1>Create your Account</h1><br>
+            {{ form_start(form) }}
+            {{ form_label(form.firstname) }}<span class="required">*</span>
+            {{ form_widget(form.firstname) }}
+            <div class="error">
+                {{ form_errors(form.firstname) }}
+            </div>
+            {{ form_label(form.lastname) }}<span class="required">*</span>
+            {{ form_widget(form.lastname) }}
+            <div class="error">
+                {{ form_errors(form.lastname) }}
+            </div>
+            {{ form_label(form.email) }}<span class="required">*</span>
+            {{ form_widget(form.email) }}
+            <div class="error">
+                {{ form_errors(form.email) }}
+            </div>
+
+                <input type="submit" name="Submit" value="Register" class="login loginmodal-submit">
+            {{ form_end(form) }}
+        </div>
+    </div>
+
+
+
+{% endblock %}

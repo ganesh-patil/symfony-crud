@@ -2,30 +2,23 @@
 
 namespace AppBundle\Tests\Form\Type;
 
-use AppBundle\Form\NewsType;
+use AppBundle\Form\UserResetType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Test\TypeTestCase;
 
 /**
- * @covers AppBundle\Form\NewsType
+ * @covers AppBundle\Form\UserResetType
  */
-class NewsTypeTest extends TypeTestCase
+class UserResetTypeTest extends TypeTestCase
 {
 
-    // get blocl prefix
-    public function testGetBlockPrefix()
-    {
-        $type = new NewsType();
-
-        $this->assertEquals('appbundle_news', $type->getBlockPrefix());
-    }
 
 
     // check configure options
     public function testConfigureOptions()
     {
         $resolver = new OptionsResolver();
-        $type = new NewsType();
+        $type = new UserResetType();
 
         $type->configureOptions($resolver);
         $this->assertTrue($resolver->isDefined('data_class'));
@@ -35,11 +28,10 @@ class NewsTypeTest extends TypeTestCase
     public function testSubmitValidData()
     {
         $formData = array(
-            'title' => 'foo',
-            'description' => 'test descirption',
+            'email' => 'testemial@mail.com',
         );
 
-        $type = new NewsType();
+        $type = new UserResetType();
         $form = $this->factory->create($type);
 
         // submit the data to the form directly

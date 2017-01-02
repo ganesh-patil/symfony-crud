@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+<channel>
+<title>News </title>
+<link>{{  baseUrl }}</link>
+<description>RSS feed</description>
+<language>en-us</language>
+<copyright>Copyright 2016 News</copyright>
+    {% for news_details in news %}
+ <item>
+<title><![CDATA[ {{ news_details.title }} ]]></title>
+<author>
+    <first_name><![CDATA[{{  news_details.getUser.firstname }}]]></first_name>
+    <last_name><![CDATA[{{  news_details.getUser.lastname }}]]></last_name>
+    <email><![CDATA[{{  news_details.getUser.email }}]]></email>
+</author>
+<link></link>
+<description><![CDATA[
+                    {{ news_details.description }} ]]>
+</description>
+     {%
+       set image =  baseUrl ~ newsImagesPath ~ news_details.imageName
+     %}
+
+<image><![CDATA[
+                    {{ image }} ]]>
+</image>
+<pubDate><![CDATA[{{ news_details.created|date('d-m-Y H:i') }}]]></pubDate>
+</item>
+    {% endfor %}
+</channel>
+</rss>

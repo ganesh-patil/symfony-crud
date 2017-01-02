@@ -40,12 +40,12 @@ footer {
 .header-options {
     color: white !important;
 }
-.error ul {
+.error ul, #user_verify_plainPassword ul {
     list-style-type: none;
     padding-left: 0px;
     color: red;
 }
-.required {
+span.required {
     color: red;
 }
 .note {
@@ -54,4 +54,7 @@ footer {
 }
 #appbundle_news_title {
     width: 85%;
+}
+.footerstart{
+    padding-top: 60px;
 }

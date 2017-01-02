@@ -1,11 +1,13 @@
-<h3>You did it! You registered!</h3>
 
-Hi {{ name }}! You're successfully registered.
+Hi {{ name }}!
+<br>
+You're successfully registered.
+<br>
+Thank you for your registration.
+<br>
+Please: <a href="{{ baseUrl ~ path('user_verification', { 'activation_code': activationCode }) }}">Click here</a> to verify your email address.
+<br>  Thank you.
 
-{# example, assuming you have a route named "login" #}
-To login, go to: <a href="#">...</a>.
 
-Thanks!
 
-{# Makes an absolute URL to the /images/logo.png file #}
-<img src="{{ absolute_url(asset('images/logo.png')) }}">
+

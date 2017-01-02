@@ -48,14 +48,14 @@ class News
     private $imageFile;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable = TRUE    )
      *
      * @var string
      */
     private $imageName;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime" , nullable = TRUE )
      *
      * @var \DateTime
      */
@@ -82,12 +82,7 @@ class News
      */
     private $description;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="user_id", type="integer")
-     */
-    private $userId;
+
 
     /**
      * @var bool
@@ -108,6 +103,14 @@ class News
     {
         $this->created = new \DateTime();
     }
+
+    /**
+     * Many News have One Use.
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="news")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */
+
+    private $user;
     /**
      * Get id
      *
@@ -116,6 +119,17 @@ class News
     public function getId()
     {
         return $this->id;
+    }
+
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    public function setUser(User $user) // Please add a Use statement on top of your document
+    {
+        $this->user = $user;
+        return $this;
     }
 
     /**
